@@ -163,7 +163,7 @@ const GigDetails = ({ gig }) => {
     <div className="space-y-8">
       {/* Gig Title and Author */}
       <div>
-        <h1 className="text-2xl font-semibold mb-4 text-black">{title}</h1>
+        <h1 className="text-2xl font-bold mb-4 text-black">{title}</h1>
         <div className="flex items-center space-x-4">
           <img
             src="/profile.jpeg"
@@ -172,7 +172,7 @@ const GigDetails = ({ gig }) => {
           />
           <div>
             <div className="flex items-center">
-              <span className="font-medium text-black">{author.name}</span>
+              <span className="text-lg font-bold text-black">{author.name}</span>
               <CheckCircle className="w-4 h-4 ml-2 text-blue-600" />
               <span className="ml-1 text-blue-600 text-sm">Verified</span>
             </div>
@@ -198,7 +198,7 @@ const GigDetails = ({ gig }) => {
 
       {/* Description */}
       <div>
-        <h2 className="font-medium mb-2 text-gray-600">Description</h2>
+        <h2 className="font-semibold mb-2 text-gray-600">Description</h2>
         <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
       </div>
 

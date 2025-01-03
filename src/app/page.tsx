@@ -446,7 +446,7 @@ const GigDetails = () => {
                   {/* Seller's Response Text */}
                   <div>
                     <h4 className="font-medium mb-2 text-black">
-                      Seller's Response
+                      Seller&apos;s Response
                     </h4>
                     <p className="text-gray-700">Thank you so much! 😊</p>
                   </div>
@@ -518,7 +518,7 @@ const GigDetails = () => {
                   {/* Seller's Response Text */}
                   <div>
                     <h4 className="font-medium mb-2 text-black">
-                      Seller's Response
+                      Seller&apos;s Response
                     </h4>
                     <p className="text-gray-700">Thank you so much! 😊</p>
                   </div>

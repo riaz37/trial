@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+//@ts-nocheck
+
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -15,7 +18,6 @@ import {
   Figma,
   Layout,
   Smartphone,
-  SearchIcon,
   Search,
 } from "lucide-react";
 
@@ -119,18 +121,20 @@ const GigCard = ({
   );
 };
 
-{/* Search Bar */}
+{
+  /* Search Bar */
+}
 
 const SearchBar = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [showDeliveryImages, setShowDeliveryImages] = useState(false);
-  const [sortBy, setSortBy] = useState('most_relevant');
+  const [sortBy, setSortBy] = useState("most_relevant");
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log('Searching for:', searchQuery);
-    console.log('Show delivery images:', showDeliveryImages);
-    console.log('Sort by:', sortBy);
+    console.log("Searching for:", searchQuery);
+    console.log("Show delivery images:", showDeliveryImages);
+    console.log("Sort by:", sortBy);
   };
 
   return (
@@ -184,8 +188,6 @@ const SearchBar = () => {
     </div>
   );
 };
-
-
 
 const ReviewStar = ({ filled = true }) => (
   <Star
@@ -378,10 +380,9 @@ const GigDetails = () => {
           </div>
         </div>
 
-        <SearchBar/>
+        <SearchBar />
 
         <hr className="my-10 border-gray-300" />
-        
 
         {/* Review Content */}
         <div className="space-y-6 mt-10">

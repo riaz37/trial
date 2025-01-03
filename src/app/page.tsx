@@ -43,38 +43,42 @@ const VideoSection = ({ title, thumbnailSrc, duration }) => (
   </div>
 );
 
+import { useState } from "react";
+
 const GigCard = ({
-  gigNumber,
+  gigs,
   profileImage,
-  title,
   authorName,
   isVerified,
   rating,
   price,
 }) => {
+  const [selectedGig, setSelectedGig] = useState(gigs[0]);
+
   return (
     <div className="w-full border rounded-lg shadow-sm overflow-hidden bg-white">
       <div className="flex bg-gray-50 border-b">
-        {[1, 2, 3].map((num) => (
+        {gigs.map((gig, index) => (
           <button
-            key={num}
+            key={index}
+            onClick={() => setSelectedGig(gig)}
             className={`flex-1 py-2 text-sm font-medium text-center border-r last:border-r-0 
               ${
-                gigNumber === num
+                selectedGig.gigNumber === gig.gigNumber
                   ? "bg-white text-black"
                   : "text-gray-500 hover:bg-gray-100"
               }`}
           >
-            Gig {num}
+            Gig {gig.gigNumber}
           </button>
         ))}
       </div>
 
       <div className="p-4">
         <VideoSection
-          title="Gigs Video"
-          thumbnailSrc="/gig1.png"
-          duration="1:23"
+          title={selectedGig.title}
+          thumbnailSrc={selectedGig.thumbnailSrc}
+          duration={selectedGig.duration}
         />
 
         <div className="flex items-center gap-3 mb-4">
@@ -96,7 +100,7 @@ const GigCard = ({
           </div>
         </div>
 
-        <p className="text-sm text-gray-700 mb-4">{title}</p>
+        <p className="text-sm text-gray-700 mb-4">{selectedGig.title}</p>
 
         <div className="flex justify-between items-end mb-4">
           <div className="flex items-center gap-1">
@@ -593,14 +597,33 @@ const GigMarketplace = () => {
         <div className="grid grid-cols-5 gap-8">
           <div className="col-span-1">
             <GigCard
-              gigNumber={1}
-              profileImage="/profile.jpeg"
-              title="I will do mobile app UI design professional and creative"
-              authorName="Jahid Hassan"
+              gigs={[
+                {
+                  gigNumber: 1,
+                  title: "Gig 1 Video",
+                  thumbnailSrc: "/gig1.png",
+                  duration: "1:23",
+                },
+                {
+                  gigNumber: 2,
+                  title: "Gig 2 Video",
+                  thumbnailSrc: "/new.png",
+                  duration: "2:45",
+                },
+                {
+                  gigNumber: 3,
+                  title: "Gig 3 Video",
+                  thumbnailSrc: "/laptop.svg",
+                  duration: "3:10",
+                },
+              ]}
+              profileImage="/profile.jpg"
+              authorName="John Doe"
               isVerified={true}
-              rating={4.9}
-              price={305}
+              rating={4.8}
+              price={99}
             />
+
             <div>
               <h3 className="font-bold text-lg mt-2 mb-2 text-center text-black">
                 Portfolio Video
@@ -634,14 +657,33 @@ const GigMarketplace = () => {
           <div className="col-span-1">
             <div className="top-6">
               <GigCard
-                gigNumber={2}
-                profileImage="/profile.jpeg"
-                title="I will design professional website UI/UX"
-                authorName="Jahid Hassan"
+                gigs={[
+                  {
+                    gigNumber: 4,
+                    title: "Gig 1 Video",
+                    thumbnailSrc: "/gig1.png",
+                    duration: "1:23",
+                  },
+                  {
+                    gigNumber: 5,
+                    title: "Gig 2 Video",
+                    thumbnailSrc: "/new.png",
+                    duration: "2:45",
+                  },
+                  {
+                    gigNumber: 6,
+                    title: "Gig 3 Video",
+                    thumbnailSrc: "/laptop.svg",
+                    duration: "3:10",
+                  },
+                ]}
+                profileImage="/profile.jpg"
+                authorName="John Doe"
                 isVerified={true}
                 rating={4.8}
-                price={450}
+                price={99}
               />
+
               <div>
                 <h3 className="font-bold text-lg mt-2 mb-2 text-center text-black">
                   Gigs Video

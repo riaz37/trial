@@ -494,7 +494,7 @@ const GigDetails = () => {
                   satisfied. Thank you!
                 </p>
                 <div className="flex items-center gap-4">
-                  <button className="flex items-center gap-2 text-gray-500 hover:text-gray-700">
+                  <button className="flex items-center gap-2 text-gray-500  hover:text-gray-700">
                     <span className="text-sm">Helpful?</span>
                     <ThumbsUp className="w-4 h-4" />
                     <span className="text-sm">Yes</span>
@@ -575,17 +575,20 @@ const GigMarketplace = () => {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
-          <Link href="/" className="flex items-center hover:text-gray-900">
-            <Home className="w-4 h-4 mr-1" />
-            Gigs Marketplace
+        <div className="flex items-center gap-2 text-sm  text-[#87878A] mb-8">
+          <Link
+            href="/"
+            className="flex items-center gap-1 hover:text-gray-900 "
+          >
+            <Image src="/home.svg" alt="Logo" width={20} height={20} />
+            <span className="ml-1 text-[18px]">Gigs Marketplace</span>
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <Link href="/web" className="hover:text-gray-900">
+          <Link href="/web" className="hover:text-gray-900 text-[18px]">
             Websites, IT & Software
           </Link>
-          <ChevronRight className="w-4 h-4" />
-          <span>Mobile & Web Application Design</span>
+          <ChevronRight className="w-4 h-4 " />
+          <span className="text-[18px]">Mobile & Web Application Design</span>
         </div>
 
         <div className="grid grid-cols-5 gap-8">

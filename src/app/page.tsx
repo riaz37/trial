@@ -268,7 +268,7 @@ const GigDetails = () => {
           <h2 className="text-[30px] font-semibold mb-4 text-black">
             Portfolio
           </h2>
-          <button className="px-6 py-2 bg-red-600 text-white rounded-[40px] font-medium flex justify-between items-center">
+          <button className="px-6 py-2 bg-[#EF0C3D] text-white rounded-[40px] font-medium flex justify-between items-center">
             View Portfolio
             <Image
               className="ml-2"

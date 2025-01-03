@@ -43,7 +43,7 @@ const VideoSection = ({ title, thumbnailSrc, duration }) => (
   </div>
 );
 
-import { useState } from "react";
+
 
 const GigCard = ({
   gigs,

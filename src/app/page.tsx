@@ -74,7 +74,7 @@ const GigCard = ({
       <div className="p-4">
         <VideoSection
           title="Gigs Video"
-          thumbnailSrc="/new.webp"
+          thumbnailSrc="/gig1.png"
           duration="1:23"
         />
 
@@ -82,8 +82,8 @@ const GigCard = ({
           <Image
             src={profileImage}
             alt={authorName}
-            width={48}
-            height={48}
+            width={38}
+            height={38}
             className="rounded-full"
           />
           <div>
@@ -138,7 +138,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="space-y-4 w-full max-w-md">
+    <div className="space-y-4 w-[300px] max-w-md">
       <form onSubmit={handleSearch} className="flex w-full">
         <div className="relative flex-1">
           <input
@@ -389,7 +389,7 @@ const GigDetails = () => {
           <div className="border-b pb-6">
             <div className="flex gap-4">
               <Image
-                src="/profile.jpeg"
+                src="/user.png"
                 alt="User"
                 width={40}
                 height={40}
@@ -461,7 +461,7 @@ const GigDetails = () => {
           <div className="border-b pb-6">
             <div className="flex gap-4">
               <Image
-                src="/profile.jpeg"
+                src="/user.png"
                 alt="User"
                 width={40}
                 height={40}

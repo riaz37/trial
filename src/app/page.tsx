@@ -607,7 +607,7 @@ const GigMarketplace = () => {
                 {
                   gigNumber: 2,
                   title: "Gig 2 Video",
-                  thumbnailSrc: "/new.png",
+                  thumbnailSrc: "/new.webp",
                   duration: "2:45",
                 },
                 {
@@ -617,7 +617,7 @@ const GigMarketplace = () => {
                   duration: "3:10",
                 },
               ]}
-              profileImage="/profile.jpg"
+              profileImage="/profile.jpeg"
               authorName="John Doe"
               isVerified={true}
               rating={4.8}
@@ -667,7 +667,7 @@ const GigMarketplace = () => {
                   {
                     gigNumber: 5,
                     title: "Gig 2 Video",
-                    thumbnailSrc: "/new.png",
+                    thumbnailSrc: "/new.webp",
                     duration: "2:45",
                   },
                   {
@@ -677,7 +677,7 @@ const GigMarketplace = () => {
                     duration: "3:10",
                   },
                 ]}
-                profileImage="/profile.jpg"
+                profileImage="/profile.jpeg"
                 authorName="John Doe"
                 isVerified={true}
                 rating={4.8}

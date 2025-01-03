@@ -8,7 +8,6 @@ import Link from "next/link";
 import {
   Play,
   ChevronRight,
-  Home,
   ChevronDown,
   Star,
   ThumbsUp,

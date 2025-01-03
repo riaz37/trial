@@ -1,627 +1,721 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-//@ts-nocheck
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Play,
-  Check,
   ChevronRight,
   Home,
   ChevronDown,
   Star,
-  Code,
+  ThumbsUp,
+  ThumbsDown,
+  Monitor,
+  PenTool,
   Figma,
-  Globe,
+  Layout,
   Smartphone,
-  ArrowRight,
-  CheckCircle,
+  SearchIcon,
+  Search,
 } from "lucide-react";
-import Image from "next/image";
 
 const NavLink = ({ href, children }) => (
-  <Link href={href} className="text-gray-600 hover:text-gray-900 px-4 py-2">
+  <Link
+    href={href}
+    className="text-gray-600 hover:text-gray-900 px-4 py-2 font-medium"
+  >
     {children}
   </Link>
 );
 
-const skills = [
-  {
-    name: "Front-end Design",
-    icon: <Code className="w-4 h-4 text-blue-500" />,
-  },
-  { name: "Figma", icon: <Figma className="w-4 h-4 text-blue-500" /> },
-  { name: "Web Design", icon: <Globe className="w-4 h-4 text-blue-500" /> },
-  {
-    name: "Mobile App",
-    icon: <Smartphone className="w-4 h-4 text-blue-500" />,
-  },
-];
-
-const reviews = [
-  { stars: 5, count: 602, percentage: 80 },
-  { stars: 4, count: 125, percentage: 15 },
-  { stars: 3, count: 40, percentage: 3 },
-  { stars: 2, count: 15, percentage: 1 },
-  { stars: 1, count: 10, percentage: 1 },
-];
-
-function FreelancerGig() {
-  return (
-    <main className="min-h-screen bg-white">
-      <div className="max-w-4xl mx-auto p-8">
-        {/* Skills Section */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold mb-4 text-black">Skills</h2>
-          <div className="flex flex-wrap gap-3">
-            {skills.map((skill) => (
-              <div
-                key={skill.name}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-200 rounded-full shadow-sm border border-gray-100"
-              >
-                {skill.icon}
-                <span className="text-sm text-blue-500">{skill.name}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Portfolio Status */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold mb-4 text-black">Portfolio</h2>
-          <div className="inline-flex items-center px-6 py-3 bg-red-500 text-white rounded-full text-sm font-medium cursor-pointer hover:bg-red-600 transition">
-            <span>See Portfolio</span>
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </div>
-        </section>
-
-        {/* Pricing Section */}
-        <section className="mb-12 grid grid-cols-3 gap-8">
-          <div className="bg-gray-100 p-6 rounded-lg shadow-sm border ">
-            <h3 className="text-lg font-bold mb-2 text-black">Product Type</h3>
-            <p className="text-gray-600">Mobile App</p>
-          </div>
-          <div className="bg-gray-100 p-6 rounded-lg shadow-sm border ">
-            <h3 className="text-lg font-semibold mb-2 text-black">Pricing</h3>
-
-            <p className="text-sm text-gray-500">330$ / Hour</p>
-          </div>
-          <div className="bg-gray-100 p-6 rounded-lg shadow-sm border ">
-            <h3 className="text-sm font-semibold mb-2 text-black">
-              Additional
-            </h3>
-
-            <p className="text-sm text-gray-500">20$ / Hour</p>
-          </div>
-        </section>
-
-        {/* Reviews Section */}
-        <section>
-          <h2 className="text-xl font-semibold mb-4 text-black">Reviews</h2>
-          <div className="bg-gray-100 p-6 rounded-lg shadow-sm border border-gray-100">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="text-4xl font-bold text-black">4.9</div>
-              <div>
-                <div className="flex items-center gap-1 mb-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-5 h-5 fill-yellow-400 text-yellow-400"
-                    />
-                  ))}
-                </div>
-                <p className="text-sm text-gray-500">
-                  902 reviews for this Gig
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              {reviews.map(({ stars, count, percentage }) => (
-                <div key={stars} className="flex items-center gap-3">
-                  <div className="flex items-center gap-1 w-24">
-                    <Star className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm text-gray-600">{stars}</span>
-                  </div>
-                  <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-yellow-400 rounded-full"
-                      style={{ width: `${percentage}%` }}
-                    />
-                  </div>
-                  <div className="w-12 text-sm text-gray-500">({count})</div>
-                </div>
-              ))}
-            </div>
-            
-          </div>
-        </section>
-        
-      </div>
-       {/* Search and Sort Section */}
-       <div className="mt-10">
-        <SearchBar />
-        <SortSelect />
-      </div>
-    </main>
-  );
-}
-
-const GigDetails = ({ gig }) => {
-  const {
-    title,
-    author,
-    rating,
-    description,
-    skills,
-    price,
-    additionalPricing,
-  } = gig;
-
-  return (
-    <div className="space-y-8">
-      {/* Gig Title and Author */}
-      <div>
-        <h1 className="text-2xl font-bold mb-4 text-black">{title}</h1>
-        <div className="flex items-center space-x-4">
-          <img
-            src="/profile.jpeg"
-            alt="profile"
-            className="w-10 h-10 rounded-full"
-          />
-          <div>
-            <div className="flex items-center">
-              <span className="text-lg font-bold text-black">{author.name}</span>
-              <CheckCircle className="w-4 h-4 ml-2 text-blue-600" />
-              <span className="ml-1 text-blue-600 text-sm">Verified</span>
-            </div>
-            <div className="flex items-center">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-4 h-4 text-yellow-400 fill-yellow-400"
-                  />
-                ))}
-              </div>
-              <span className="ml-1 text-sm text-gray-600">
-                ({rating.score})
-              </span>
-              <span className="ml-4 text-sm text-gray-500">
-                {rating.orders} Orders in Queue
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Description */}
-      <div>
-        <h2 className="font-semibold mb-2 text-gray-600">Description</h2>
-        <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
-      </div>
-
-      <FreelancerGig />
+const VideoSection = ({ title, thumbnailSrc, duration }) => (
+  <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden mb-4">
+    <Image src={thumbnailSrc} alt={title} fill className="object-cover" />
+    <div className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30">
+      <button className="rounded-full bg-black/50 p-4 hover:scale-110 transition-transform">
+        <Play className="w-8 h-8 text-white" fill="white" />
+      </button>
     </div>
-  );
-};
-
-//Gig cards
+    <div className="absolute bottom-2 right-2 bg-black/75 text-white text-xs px-2 py-1 rounded">
+      {duration}
+    </div>
+  </div>
+);
 
 const GigCard = ({
-  tabs, // Array of tab labels
-  gigTitle,
-  profileName,
+  gigNumber,
   profileImage,
+  title,
+  authorName,
   isVerified,
-  description,
   rating,
-  reviews,
   price,
-  portfolioImage,
-  portfolioVideo,
 }) => {
   return (
-    <div className="w-80 border rounded-lg shadow-md overflow-hidden">
-      {/* Tabs */}
-      <div className="flex bg-gray-100 text-sm font-medium border-b">
-        {tabs.map((tab, index) => (
+    <div className="w-full border rounded-lg shadow-sm overflow-hidden bg-white">
+      <div className="flex bg-gray-50 border-b">
+        {[1, 2, 3].map((num) => (
           <button
-            key={index}
-            className="flex-1 py-2 text-center text-black hover:bg-gray-200 relative"
+            key={num}
+            className={`flex-1 py-2 text-sm font-medium text-center border-r last:border-r-0 
+              ${
+                gigNumber === num
+                  ? "bg-white text-black"
+                  : "text-gray-500 hover:bg-gray-100"
+              }`}
           >
-            {tab}
-            {/* Green border on hover */}
-            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-green-500 scale-x-0 transition-transform transform origin-center hover:scale-x-100"></span>
+            Gig {num}
           </button>
         ))}
       </div>
 
-      {/* Content */}
       <div className="p-4">
-        {/* Image Section */}
-        <div className="w-full h-44 relative">
-          <Image
-            src={portfolioImage} // Dynamic portfolio image
-            alt="Gig Image"
-            fill
-            className="object-cover rounded-md"
-          />
-        </div>
+        <VideoSection
+          title="Gigs Video"
+          thumbnailSrc="/new.webp"
+          duration="1:23"
+        />
 
-        {/* Profile Section */}
-        <div className="flex items-center gap-3 mt-4">
+        <div className="flex items-center gap-3 mb-4">
           <Image
-            src={profileImage} // Dynamic profile image
-            alt="Profile Picture"
-            width={50}
-            height={50}
-            className="rounded-full border border-gray-300"
+            src={profileImage}
+            alt={authorName}
+            width={48}
+            height={48}
+            className="rounded-full"
           />
           <div>
-            <h3 className="text-lg font-semibold text-black">{profileName}</h3>
+            <h3 className="font-medium text-black mb-1">{authorName}</h3>
             {isVerified && (
               <div className="flex items-center gap-1">
-                <CheckCircle className="w-4 h-4 text-blue-600" />{" "}
-                <span className="text-xs text-blue-600 font-medium">
-                  Verified
-                </span>
-                {/* Changed to blue */}
+                <Image src="/tick.svg" alt="Verified" width={16} height={16} />
+                <span className="text-xs text-[#3897F0]">Verified</span>
               </div>
             )}
           </div>
         </div>
 
-        {/* Description */}
-        <p className="mt-3 text-gray-700 text-sm">{description}</p>
+        <p className="text-sm text-gray-700 mb-4">{title}</p>
 
-        {/* Rating */}
-        <div className="flex items-center gap-1 mt-2 text-sm text-gray-500">
-          <span className="text-yellow-500 font-medium">⭐ {rating}</span>
-          <span>({reviews})</span>
+        <div className="flex justify-between items-end mb-4">
+          <div className="flex items-center gap-1">
+            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+            <span className="text-sm font-medium text-gray-500">{rating}</span>
+            <span className="text-xs text-gray-400">({378})</span>
+          </div>
+
+          <div className="text-right">
+            <p className="text-xs text-gray-500">STARTING AT</p>
+            <p className="text-lg font-semibold text-gray-900">${price}</p>
+          </div>
         </div>
 
-        {/* Price and Button Section */}
-        <div className="flex items-center mt-4">
-          <button className="w-full bg-teal-500 hover:bg-teal-600 text-white font-medium py-3 rounded-lg transition-colors">
-            Add to Cart - ${price}
+        <button className="w-full bg-[#009C9A] hover:bg-teal-600 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2">
+          <Image src="/cart.svg" alt="Cart" width={16} height={16} />
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  );
+};
+
+{/* Search Bar */}
+
+const SearchBar = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showDeliveryImages, setShowDeliveryImages] = useState(false);
+  const [sortBy, setSortBy] = useState('most_relevant');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log('Searching for:', searchQuery);
+    console.log('Show delivery images:', showDeliveryImages);
+    console.log('Sort by:', sortBy);
+  };
+
+  return (
+    <div className="space-y-4 w-full max-w-md">
+      <form onSubmit={handleSearch} className="flex w-full">
+        <div className="relative flex-1">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search reviews"
+            className="w-full px-4 py-2 border border-gray-300 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-gray-800 text-white rounded-r hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        >
+          <Search className="w-5 h-5" />
+        </button>
+      </form>
+
+      <div className="space-y-3">
+        <div className="flex items-center">
+          <span className="text-sm text-gray-600 mr-2">Sort By</span>
+          <div className="relative">
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="appearance-none bg-white border border-gray-300 text-[#404145] rounded px-3 py-1 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            >
+              <option value="most_relevant">Most relevant</option>
+              <option value="newest">Newest</option>
+              <option value="highest_rated">Highest rated</option>
+              <option value="lowest_rated">Lowest rated</option>
+            </select>
+            <ChevronDown className="w-4 h-4 text-gray-500 absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+          </div>
+        </div>
+
+        <label className="flex items-center space-x-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={showDeliveryImages}
+            onChange={(e) => setShowDeliveryImages(e.target.checked)}
+            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+          <span className="text-sm text-gray-600">Delivery images (558)</span>
+        </label>
+      </div>
+    </div>
+  );
+};
+
+
+
+const ReviewStar = ({ filled = true }) => (
+  <Star
+    className={`w-4 h-4 ${
+      filled ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+    }`}
+  />
+);
+const GigDetails = () => {
+  return (
+    <div className="border rounded-lg p-6 bg-white">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="flex-1">
+          <h1 className="text-2xl mb-4 font-semibold text-black">
+            I will do mobile app UI design professional and creative
+          </h1>
+          <div className="flex items-center gap-3 mb-2">
+            <Image
+              src="/profile.jpeg"
+              alt="Jahid Hassan"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+            <span className="font-bold text-black">Jahid Hassan</span>
+            <Image src="/tick.svg" alt="Verified" width={16} height={16} />
+            <span className="text-xs text-[#3897F0]">Verified</span>
+            <div className="flex items-center gap-1">
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+              <span className="text-gray-500">4.9 (718)</span>
+            </div>
+            <span className="text-gray-500 text-sm">3 Orders in Queue</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="mb-8">
+        <p className="text-gray-700 leading-relaxed">
+          App development expert about UI/UX/Prototype design with 5+ years
+          experience. I have an early start with a keen interest in Website and
+          Mobile Application User Interface. I can create high-quality and
+          exceptionally pleasing designs in a user-humanized view. Check out the
+          portfolio section of my profile to see samples of my work and feel
+          free to discuss your designing needs. I mostly use Adobe Photoshop,
+          Illustrator, XD, and Figma.
+        </p>
+      </div>
+
+      <div className="space-y-8 mb-8">
+        {/* Skills Section */}
+        <div>
+          <h2 className="text-[30px] font-semibold mb-4 text-black">Skills</h2>
+          <div className="flex flex-wrap gap-2">
+            <span className="flex items-center px-3 py-1 bg-gray-100 text-[#578CDA] rounded-full text-sm">
+              <Monitor className="w-4 h-4 mr-2" />
+              User Interface Design
+            </span>
+            <span className="flex items-center px-3 py-1 bg-gray-100 text-[#578CDA] rounded-full text-sm">
+              <PenTool className="w-4 h-4 mr-2" />
+              UI
+            </span>
+            <span className="flex items-center px-3 py-1 bg-gray-100 text-[#578CDA] rounded-full text-sm">
+              <Figma className="w-4 h-4 mr-2" />
+              Figma
+            </span>
+            <span className="flex items-center px-3 py-1 bg-gray-100 text-[#578CDA] rounded-full text-sm">
+              <Layout className="w-4 h-4 mr-2" />
+              Web Design
+            </span>
+            <span className="flex items-center px-3 py-1 bg-gray-100 text-[#578CDA] rounded-full text-sm">
+              <Smartphone className="w-4 h-4 mr-2" />
+              Mobile App
+            </span>
+          </div>
+        </div>
+
+        {/* Portfolio Section */}
+        <div>
+          <h2 className="text-[30px] font-semibold mb-4 text-black">
+            Portfolio
+          </h2>
+          <button className="px-6 py-2 bg-red-600 text-white rounded-[40px] font-medium flex justify-between items-center">
+            View Portfolio
+            <Image
+              className="ml-2"
+              src="/arrow.svg"
+              height={16}
+              width={16}
+              alt="Arrow Right"
+            />
           </button>
         </div>
-      </div>
+        <div className="mt-8">
+          <div className="grid grid-cols-3 gap-4 items-start">
+            {/* Product Type */}
+            <div className="text-center">
+              <h2 className="text-[30px] font-semibold mb-2 text-black">
+                Product Type
+              </h2>
+              <p className="text-lg text-[#000000]">Mobile App</p>
+            </div>
 
-      {/* Portfolio Video */}
-      {portfolioVideo && (
-        <div>
-          <h2 className="font-bold text-center text-[25px] mb-2 text-black">
-            Portfolio Video
-          </h2>
-          <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden">
-            <button className="absolute inset-0 flex items-center justify-center">
-              <Image
-                src={portfolioVideo}
-                width={1000}
-                height={1000}
-                alt="Service preview"
-              />
-            </button>
+            {/* Pricing */}
+            <div className="text-center">
+              <h2 className="text-[30px] font-semibold mb-2 text-black">
+                Pricing
+              </h2>
+              <p className="text-lg text-[#000000]">$330</p>
+            </div>
+
+            {/* Additional */}
+            <div className="text-center">
+              <h2 className="text-[20px] font-semibold mb-2 text-black">
+                Additional
+              </h2>
+              <p className="text-lg text-[#000000]">20$ / Hour</p>
+            </div>
           </div>
         </div>
-      )}
-    </div>
-  );
-};
+      </div>
 
-// Icons
-const SearchIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-    <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-  </svg>
-);
+      <div>
+        <div className="flex flex-col mb-6">
+          <h2 className="text-[30px] font-semibold text-[#404145]">Reviews</h2>
+          <div className="flex items-center justify-between mt-1">
+            <h3 className="text-medium text-[#404145]">
+              902 Reviews for this Gig
+            </h3>
+            <div className="flex items-center gap-2">
+              <div className="flex">
+                {Array(5)
+                  .fill(0)
+                  .map((_, i) => (
+                    <ReviewStar key={i} />
+                  ))}
+              </div>
+              <span className="text-sm font-medium text-[#FFB33E]">4.9</span>
+            </div>
+          </div>
+        </div>
 
-const StarIcon = () => (
-  <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-  </svg>
-);
+        <div className="grid grid-cols-2 gap-8 mb-8">
+          {/* Review Ratings */}
+          <div className="space-y-2">
+            {[5, 4, 3, 2, 1].map((rating) => (
+              <div key={rating} className="flex items-center gap-2">
+                <span className="w-16 text-sm text-[#446EE7]">
+                  {rating} Stars
+                </span>
+                <div className="flex-1 bg-gray-200 h-2 rounded-full">
+                  <div
+                    className="h-full bg-yellow-400 rounded-full"
+                    style={{
+                      width: rating === 5 ? "92%" : rating === 4 ? "6%" : "2%",
+                    }}
+                  />
+                </div>
+                <span className="w-12 text-sm text-[#446EE7] text-right">
+                  {rating === 5 ? "92%" : rating === 4 ? "6%" : "2%"}
+                </span>
+              </div>
+            ))}
+          </div>
 
-const ThumbUpIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-  </svg>
-);
-
-const ThumbDownIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018c.163 0 .326.02.485.06L17 4m-7 10v2a2 2 0 002 2h.095c.5 0 .905-.405.905-.905 0-.714.211-1.412.608-2.006L17 13V4m-7 10h2m5 10v-6a2 2 0 00-2-2h-2.5" />
-  </svg>
-);
-
-
-
-// Components
-const SearchBar = () => (
-  <div className="flex gap-2 mb-4">
-    <input
-      type="text"
-      placeholder="Search reviews"
-      className="border p-2 flex-grow"
-    />
-    <button className="bg-gray-800 text-white px-4 py-2">
-      <SearchIcon />
-    </button>
-  </div>
-);
-
-const SortSelect = () => (
-  <div className="flex items-center text-sm text-gray-600">
-    <span>Sort by: </span>
-    <select className="ml-2 border-none bg-transparent font-medium">
-      <option>Most relevant</option>
-    </select>
-  </div>
-);
-
-const Rating = () => (
-  <div className="flex">
-    {[1, 2, 3, 4, 5].map((star) => (
-      <StarIcon key={star} />
-    ))}
-  </div>
-);
-
-const HelpfulButtons = () => (
-  <div className="flex items-center gap-4">
-    <span className="text-sm text-gray-600">Helpful?</span>
-    <button className="text-sm text-gray-600 flex items-center gap-1">
-      <ThumbUpIcon />
-      Yes
-    </button>
-    <button className="text-sm text-gray-600 flex items-center gap-1">
-      <ThumbDownIcon />
-      No
-    </button>
-  </div>
-);
-
-const Avatar = ({ initial, size = 'md', gradient = false }) => {
-  const sizeClasses = size === 'sm' ? 'w-8 h-8' : 'w-10 h-10';
-  const bgClasses = gradient 
-    ? 'bg-gradient-to-r from-purple-500 to-pink-500'
-    : 'bg-gray-300';
-
-  return (
-    <div className={`${sizeClasses} rounded-full ${bgClasses} flex items-center justify-center text-white`}>
-      {initial}
-    </div>
-  );
-};
-
-const SellerResponse = ({ content }) => (
-  <div className="mt-4 bg-gray-50 p-4 rounded-lg">
-    <div className="flex items-center gap-2 mb-2">
-      <Avatar initial="S" size="sm" gradient />
-      <span className="font-medium">Seller&apos;s Response</span>
-    </div>
-    <p className="text-gray-800">{content}</p>
-  </div>
-);
-
-function App() {
-  return (
-    <div className="max-w-[800px]  mx-auto ">
-     
-
-      {/* Review Card */}
-      <div className="border-t py-6">
-        <div className="flex items-start gap-4">
-          <Avatar initial="M" />
-
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-1">
-              <h3 className="font-medium text-black">marvinachi</h3>
-              <div className="flex items-center gap-1">
-                <img 
-                  src="https://flagcdn.com/w20/us.png" 
-                  alt="US flag" 
-                  className="w-4 h-3"
-                />
-                <span className="text-sm text-gray-600">United States</span>
+          {/* Review Details */}
+          <div className="space-y-4">
+            <p className="text-medium font-semibold text-black">
+              Rating Breakdown
+            </p>
+            <div>
+              <div className="flex items-center justify-between ">
+                <span className="text-sm text-gray-600">Communication</span>
+                <div className="flex items-center gap-1">
+                  <Star className="w-5 h-5 fill-yellow-400 text-[]" />
+                  <span className="font-medium text-[#FFB33E]">4.9</span>
+                </div>
               </div>
             </div>
-
-            <div className="flex items-center gap-2 mb-2">
-              <Rating />
-              <span className="text-sm text-gray-600">2 months ago</span>
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm text-gray-600">
+                  Service as Described
+                </span>
+                <div className="flex items-center gap-1">
+                  <Star className="w-5 h-5 fill-yellow-400 text-[]" />
+                  <span className="font-medium text-[#FFB33E]">4.9</span>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <p className="text-gray-800 mb-4">
-              Great work! I wanted a video to showcase my fitness app and the designer delivered an excellent job and on time. highly satisfied. thank you!
-            </p>
+        <SearchBar/>
 
-            <HelpfulButtons />
+        <hr className="my-10 border-gray-300" />
+        
 
-            <SellerResponse content="Thank you so much 😊" />
+        {/* Review Content */}
+        <div className="space-y-6 mt-10">
+          <div className="border-b pb-6">
+            <div className="flex gap-4">
+              <Image
+                src="/profile.jpeg"
+                alt="User"
+                width={40}
+                height={40}
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-black font-semibold"
+              />
+              <div className="flex-1">
+                <div className="flex flex-col mb-2">
+                  <h3 className="font-medium text-black">marvinachi</h3>
+                  <div className="flex items-center gap-3 text-sm text-gray-500 mt-1">
+                    <span className="flex items-center gap-1">
+                      <Image
+                        src="/flag.svg"
+                        alt="BD"
+                        width={16}
+                        height={16}
+                        className="rounded-sm"
+                      />
+                      Bangladesh
+                    </span>
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      <span className="font-medium text-black">5</span>
+                    </div>
+                    <span>2 months ago</span>
+                  </div>
+                </div>
+                <p className="text-gray-700 mb-4">
+                  Great work! I wanted a video to showcase my fitness app and
+                  the designer delivered an excellent job and on time. Highly
+                  satisfied. Thank you!
+                </p>
+                <div className="flex items-center gap-4">
+                  <button className="flex items-center gap-2 text-gray-500 hover:text-gray-700">
+                    <span className="text-sm">Helpful?</span>
+                    <ThumbsUp className="w-4 h-4" />
+                    <span className="text-sm">Yes</span>
+                  </button>
+                  <button className="flex items-center gap-2 text-gray-500 hover:text-gray-700">
+                    <ThumbsDown className="w-4 h-4" />
+                    <span className="text-sm">No</span>
+                  </button>
+                </div>
+                {/* Seller's Response */}
+                <div className="mt-4 bg-gray-50 p-4 rounded-lg flex items-start gap-4">
+                  {/* Seller's Image */}
+                  <Image
+                    src="/profile.jpeg" // Replace with the actual image URL
+                    alt="Seller's Profile"
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+
+                  {/* Seller's Response Text */}
+                  <div>
+                    <h4 className="font-medium mb-2 text-black">
+                      Seller's Response
+                    </h4>
+                    <p className="text-gray-700">Thank you so much! 😊</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Review Content */}
+        <div className="space-y-6 mt-6">
+          <div className="border-b pb-6">
+            <div className="flex gap-4">
+              <Image
+                src="/profile.jpeg"
+                alt="User"
+                width={40}
+                height={40}
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-black font-semibold"
+              />
+              <div className="flex-1">
+                <div className="flex flex-col mb-2">
+                  <h3 className="font-medium text-black">marvinachi</h3>
+                  <div className="flex items-center gap-3 text-sm text-gray-500 mt-1">
+                    <span className="flex items-center gap-1">
+                      <Image
+                        src="/flag.svg"
+                        alt="BD"
+                        width={16}
+                        height={16}
+                        className="rounded-sm"
+                      />
+                      Bangladesh
+                    </span>
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      <span className="font-medium text-black">5</span>
+                    </div>
+                    <span>2 months ago</span>
+                  </div>
+                </div>
+                <p className="text-gray-700 mb-4">
+                  Great work! I wanted a video to showcase my fitness app and
+                  the designer delivered an excellent job and on time. Highly
+                  satisfied. Thank you!
+                </p>
+                <div className="flex items-center gap-4">
+                  <button className="flex items-center gap-2 text-gray-500 hover:text-gray-700">
+                    <span className="text-sm">Helpful?</span>
+                    <ThumbsUp className="w-4 h-4" />
+                    <span className="text-sm">Yes</span>
+                  </button>
+                  <button className="flex items-center gap-2 text-gray-500 hover:text-gray-700">
+                    <ThumbsDown className="w-4 h-4" />
+                    <span className="text-sm">No</span>
+                  </button>
+                </div>
+                {/* Seller's Response */}
+                <div className="mt-4 bg-gray-50 p-4 rounded-lg flex items-start gap-4">
+                  {/* Seller's Image */}
+                  <Image
+                    src="/profile.jpeg" // Replace with the actual image URL
+                    alt="Seller's Profile"
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+
+                  {/* Seller's Response Text */}
+                  <div>
+                    <h4 className="font-medium mb-2 text-black">
+                      Seller's Response
+                    </h4>
+                    <p className="text-gray-700">Thank you so much! 😊</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
-
-
-const GigMarketplaceLayout = () => {
-  const gigDetails = {
-    title: "I will do mobile app UI design professional and creative",
-    author: {
-      name: "Jahid Hassan",
-    },
-    rating: {
-      score: 4.8,
-      orders: 3,
-    },
-    description:
-      "I've been passionate about graphic design and digital art from an early age with a keen interest in Website and Mobile Application User Interfaces. I can create high-quality and aesthetically pleasing designs in a quick turnaround time. Check out the portfolio section of my profile to see samples of my work and feel free to discuss your designing needs. I mostly use Adobe Photoshop, Illustrator, XD, and Figma.\n\n" +
-      "* Website User Experience and Interface (UI/UX) Design for all kinds of Professional and Personal websites.\n" +
-      "* Mobile Application User Experience and Interface Design for all kinds of IOS/Android and Hybrid Mobile Applications.\n" +
-      "* Wireframe Designs.",
-    price: 305,
-    additionalPricing: 20,
-  };
-
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-
-  const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
-  };
-
-  const closeDropdown = () => {
-    setDropdownVisible(false);
-  };
-
-  const Dropdown = ({ isVisible, items }) => {
-    if (!isVisible) return null;
-    return (
-      <div className="absolute mt-2 bg-white border rounded-lg shadow-lg">
-        {items.map((item, index) => (
-          <Link
-            key={index}
-            href={item.href}
-            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-          >
-            {item.label}
-          </Link>
-        ))}
-      </div>
-    );
-  };
-
-  const dropdownItems = [
-    { label: "Overview", href: "/how-it-works/overview" },
-    { label: "For Clients", href: "/how-it-works/clients" },
-    { label: "For Freelancers", href: "/how-it-works/freelancers" },
-  ];
+const GigMarketplace = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white">
-      <header className="border-b py-4">
-        <div className="max-w-7xl mx-auto py-5 px-4 h-16 flex items-center justify-between relative">
-          {/* Logo */}
-          <Image src="/logo.png" alt="Logo" width={100} height={100} />
+    <div className="min-h-screen bg-gray-50">
+      <header className="border-b bg-white">
+        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+          <Image src="/logo.png" alt="Logo" width={100} height={40} />
 
-          {/* Navigation & Buttons */}
-          <div className="flex items-center space-x-4">
-            <nav className="hidden md:flex items-center space-x-4">
-              {/* Dropdown for "How it Works" */}
-              <div className="relative" onMouseLeave={closeDropdown}>
+          <div className="flex items-center gap-4">
+            <nav className="hidden md:flex items-center gap-6">
+              <div className="relative">
                 <button
-                  onClick={toggleDropdown}
-                  className="text-gray-600 hover:text-gray-900 px-4 py-2 flex items-center"
+                  onClick={() => setShowDropdown(!showDropdown)}
+                  className="flex items-center gap-1 text-gray-600 hover:text-gray-900"
                 >
                   How it Works
-                  <ChevronDown className="w-4 h-4 ml-1" />
+                  <ChevronDown className="w-4 h-4" />
                 </button>
-                <Dropdown isVisible={dropdownVisible} items={dropdownItems} />
               </div>
-
               <NavLink href="/pricing">Pricing</NavLink>
-              <NavLink href="/real-results">Real Results</NavLink>
+              <NavLink href="/results">Real Results</NavLink>
             </nav>
-            <button className="px-4 py-2 font-medium text-white bg-blue-900 rounded-[100px]">
-              POST A JOB
-            </button>
-            <button className="px-4 py-2 font-medium text-white bg-teal-500 rounded-[100px]">
-              FIND JOBS
-            </button>
 
-            <NavLink href="/login">LOG IN</NavLink>
-            <NavLink href="/signup">SIGN UP</NavLink>
+            <div className="flex items-center gap-3">
+              <button className="px-6 py-2 bg-[#024570] text-white rounded-full font-medium">
+                POST A JOB
+              </button>
+              <button className="px-6 py-2 bg-[#009C9A] text-white rounded-full font-medium">
+                FIND JOBS
+              </button>
+              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 font-medium">
+                LOG IN
+              </button>
+              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 font-medium">
+                SIGN UP
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto px-4 pt-10 flex items-center text-sm text-gray-500">
-        <Link href="/" className="flex items-center hover:text-gray-900">
-          <Home className="w-4 h-4 mr-2" />
-          Gigs Marketplace
-        </Link>
-        <ChevronRight className="w-4 h-4 mx-2" />
-        <Link href="/websites" className="hover:text-gray-900">
-          Websites, IT & Software
-        </Link>
-        <ChevronRight className="w-4 h-4 mx-2" />
-        <span>Mobile & Web Application Design</span>
-      </div>
+      <div className="max-w-7xl mx-auto px-4 py-6">
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+          <Link href="/" className="flex items-center hover:text-gray-900">
+            <Home className="w-4 h-4 mr-1" />
+            Gigs Marketplace
+          </Link>
+          <ChevronRight className="w-4 h-4" />
+          <Link href="/web" className="hover:text-gray-900">
+            Websites, IT & Software
+          </Link>
+          <ChevronRight className="w-4 h-4" />
+          <span>Mobile & Web Application Design</span>
+        </div>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-          {/* Left Sidebar - Gig Card */}
+        <div className="grid grid-cols-5 gap-8">
           <div className="col-span-1">
             <GigCard
-              tabs={["Gig 1", "Gig 2", "Gig 3"]}
-              gigTitle="Mobile App UI Design"
-              profileName="Jahid Hasan"
+              gigNumber={1}
               profileImage="/profile.jpeg"
+              title="I will do mobile app UI design professional and creative"
+              authorName="Jahid Hassan"
               isVerified={true}
-              description="I will do mobile app UI design professional and creative."
-              rating={5.0}
-              reviews={378}
+              rating={4.9}
               price={305}
-              portfolioImage="/money.png"
-              portfolioVideo="/youtube.png"
             />
+            <div>
+              <h3 className="font-bold text-lg mt-2 mb-2 text-center text-black">
+                Portfolio Video
+              </h3>
+              <VideoSection
+                title="Gigs Video"
+                thumbnailSrc="/money.png"
+                duration="1:45"
+              />
+            </div>
           </div>
 
-          {/* Center Column - Gallery & Details */}
-          <div className="col-span-3 pl-[60px] ml-[40px]">
-            {/* Image Gallery */}
-            <div className="relative aspect-video  w-full mb-8 bg-gray-100 rounded-lg overflow-hidden">
+          <div className="col-span-3">
+            <div className="aspect-video relative rounded-lg overflow-hidden mb-8 bg-gray-100">
               <Image
                 src="/new.webp"
-                width={1000}
-                height={1000}
-                alt="Service preview"
-                className="w-full h-full object-cover"
+                alt="Main preview"
+                fill
+                className="object-cover"
               />
-              <button className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition">
-                <div className="rounded-full mx-auto bg-black/50 p-4 group-hover:scale-110 transition-transform">
+              <button className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 group">
+                <div className="rounded-full bg-black/50 p-4 group-hover:scale-110 transition-transform">
                   <Play className="w-12 h-12 text-white" fill="white" />
                 </div>
               </button>
             </div>
 
-            {/* Gig Details Component */}
-            <GigDetails gig={gigDetails} />
+            <GigDetails />
           </div>
 
-          {/* Right Sidebar - Gig Card */}
           <div className="col-span-1">
-            <GigCard
-              tabs={["Gig 4", "Gig 5", "Gig 6"]}
-              gigTitle="Website Design"
-              profileName="Jahid Hasan"
-              profileImage="/profile.jpeg"
-              isVerified={true}
-              description="I will design a professional and creative website UI/UX."
-              rating={4.9}
-              reviews={245}
-              price={450}
-              portfolioImage="/docker.png"
-              portfolioVideo="/youtube.png"
-            />
-
+            <div className="top-6">
+              <GigCard
+                gigNumber={2}
+                profileImage="/profile.jpeg"
+                title="I will design professional website UI/UX"
+                authorName="Jahid Hassan"
+                isVerified={true}
+                rating={4.8}
+                price={450}
+              />
+              <div>
+                <h3 className="font-bold text-lg mt-2 mb-2 text-center text-black">
+                  Gigs Video
+                </h3>
+                <VideoSection
+                  title="Gigs Video"
+                  thumbnailSrc="/new.webp"
+                  duration="1:45"
+                />
+              </div>
+            </div>
           </div>
-           
         </div>
-       
-      </main>
-      <App/>
-      <App/>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-white border-t mt-16">
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <div className="grid grid-cols-4 gap-8">
+            <div>
+              <h3 className="font-semibold mb-4 text-black">Categories</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li>Graphics & Design</li>
+                <li>Digital Marketing</li>
+                <li>Writing & Translation</li>
+                <li>Video & Animation</li>
+                <li>Music & Audio</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4 text-black">About</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li>Careers</li>
+                <li>Press & News</li>
+                <li>Partnerships</li>
+                <li>Privacy Policy</li>
+                <li>Terms of Service</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4 text-black">Support</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li>Help & Support</li>
+                <li>Trust & Safety</li>
+                <li>Selling on Platform</li>
+                <li>Buying on Platform</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4 text-black">Community</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li>Events</li>
+                <li>Blog</li>
+                <li>Forum</li>
+                <li>Community Standards</li>
+                <li>Podcast</li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t mt-8 pt-8 flex justify-between items-center">
+            <p className="text-sm text-gray-500">© 2025 All rights reserved</p>
+            <div className="flex items-center gap-6">
+              <Link href="#" className="text-gray-600 hover:text-gray-900">
+                Terms
+              </Link>
+              <Link href="#" className="text-gray-600 hover:text-gray-900">
+                Privacy
+              </Link>
+              <Link href="#" className="text-gray-600 hover:text-gray-900">
+                Cookies
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
 
-export default GigMarketplaceLayout;
+export default GigMarketplace;
